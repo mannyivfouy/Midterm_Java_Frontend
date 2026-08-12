@@ -20,15 +20,15 @@ export class StaffService{
     return this.http.get<Staff>(`${this.apiUrl}/${id}`);
   }
 
-  createStaff(Staff: Staff): Observable<Staff> {
-    return this.http.post<Staff>(this.apiUrl, Staff);
+  createStaff(staff: Omit<Staff, 'sId'>): Observable<Staff> {
+    return this.http.post<Staff>(this.apiUrl, staff);
   }
 
-  updateStaff(id: number, Staff: Staff): Observable<Staff> {
-    return this.http.put<Staff>(`${this.apiUrl}/${id}`, Staff);
+  updateStaff(sId: number, staff: Omit<Staff, 'sId'>): Observable<Staff> {
+    return this.http.put<Staff>(`${this.apiUrl}/${sId}`, staff);
   }
 
-  deleteStaff(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteStaff(sId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${sId}`);
   }
 }

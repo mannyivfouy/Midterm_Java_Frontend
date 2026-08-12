@@ -1,1 +1,75 @@
-<p>staff-form works!</p>
+<div class="rounded-xl bg-white p-6">
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold text-gray-800">
+      {{ staff ? 'Edit Staff' : 'Add Staff' }}
+    </h2>
+
+    <p class="mt-1 text-sm text-gray-500">
+      {{ staff ? 'Update staff information' : 'Create a new staff account' }}
+    </p>
+  </div>
+
+  <form (ngSubmit)="submit()" class="space-y-5">
+    <!-- Username -->
+    <div>
+      <label class="mb-2 block text-sm font-medium text-gray-700"> Username </label>
+
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="form.username"
+        required
+        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+        placeholder="Enter username"
+      />
+    </div>
+
+    <!-- Password -->
+    <div>
+      <label class="mb-2 block text-sm font-medium text-gray-700"> Password </label>
+
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="form.password"
+        required
+        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+        placeholder="Enter password"
+      />
+    </div>
+
+    <!-- Role -->
+    <div>
+      <label class="mb-2 block text-sm font-medium text-gray-700"> Role </label>
+
+      <select
+        name="role"
+        [(ngModel)]="form.role"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+      >
+        <option value="admin">Admin</option>
+        <option value="stock_controller">Stock Controller</option>
+        <option value="user">User</option>
+
+      </select>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-end gap-3 pt-4">
+      <button
+        type="button"
+        (click)="cancel()"
+        class="cursor-pointer rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        class="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700"
+      >
+        {{ staff ? 'Update Staff' : 'Create Staff' }}
+      </button>
+    </div>
+  </form>
+</div>
