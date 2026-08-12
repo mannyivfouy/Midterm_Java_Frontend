@@ -6,5 +6,6 @@ export interface LoginRequest {
 export interface LoginResponse {
   sId: number;
   username: string;
+  password: string;
   role: string;
 }

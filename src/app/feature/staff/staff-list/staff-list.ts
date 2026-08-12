@@ -2,15 +2,18 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Staff } from '../../../core/models/staff.model';
 import { StaffService } from '../../../core/services/staff.service';
 import { CommonModule } from '@angular/common';
+import { StaffForm } from "../staff-form/staff-form";
 
 @Component({
   selector: 'app-staff-list',
-  imports: [CommonModule],
+  imports: [CommonModule, StaffForm],
   templateUrl: './staff-list.html',
   styleUrl: './staff-list.css',
 })
 export class StaffList {
   staffs: Staff[] = [];
+  showForm = false;
+  selectedStaff: Staff | null = null;
 
   constructor(
     private staffService: StaffService,
@@ -18,14 +21,14 @@ export class StaffList {
   ) {}
 
   ngOnInit(): void {
-    this.loadStaffs()
+    this.loadStaffs();
   }
 
   loadStaffs(): void {
     this.staffService.getAllStaffs().subscribe({
       next: (res) => {
         this.staffs = res;
-        this.cdr.detectChanges()
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Failed to load staffs:', err);
@@ -33,11 +36,38 @@ export class StaffList {
     });
   }
 
+  createStaff(): void {
+    this.selectedStaff = null;
+    this.showForm = true;
+  }
+
   editStaff(staff: Staff): void {
-    console.log('Edit:', staff);
+    this.selectedStaff = staff;
+    this.showForm = true;
+  }
+
+  closeForm(): void {
+    this.showForm = false;
+    this.selectedStaff = null;
+  }
+
+  onSaved(): void {
+    this.closeForm();
+    this.loadStaffs();
   }
 
   deleteStaff(sId: number): void {
-    console.log('Delete:', sId);
+    if (!confirm('Are you sure you want to delete this staff?')) {
+      return;
+    }
+
+    this.staffService.deleteStaff(sId).subscribe({
+      next: () => {
+        this.loadStaffs();
+      },
+      error: (error) => {
+        console.error('Failed to delete staff:', error);
+      },
+    });
   }
 }
