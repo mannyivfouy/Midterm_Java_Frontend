@@ -8,6 +8,7 @@
     </div>
 
     <button
+      (click)="createStaff()"
       class="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700"
     >
       Add Staff
@@ -93,3 +94,11 @@
     </div>
   </div>
 </div>
+
+@if (showForm) {
+  <app-staff-form
+    [staff]="selectedStaff"
+    (saved)="onSaved()"
+    (cancelled)="closeForm()"
+  ></app-staff-form>
+}
