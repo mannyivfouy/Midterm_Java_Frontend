@@ -31,7 +31,11 @@ export class Auth {
         console.log('Login Success', res);
         localStorage.setItem('staff', JSON.stringify(res));
 
-        this.router.navigate(['/dashboard']);
+        if (res.role === 'stock_controller') {
+          this.router.navigate(['/products/list']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       },
       error: (error) => {
         console.error('Login failed:', error);
