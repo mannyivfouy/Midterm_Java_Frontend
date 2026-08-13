@@ -6,13 +6,23 @@
 
   <!-- Navigation -->
   <nav class="p-4 space-y-2">
-    <a
-      routerLink="/dashboard"
-      routerLinkActive="bg-indigo-600 text-white hover:bg-indigo-600"
-      class="flex items-center rounded-lg px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
-    >
-      <span>Dashboard</span>
-    </a>
+    @if(isAdmin()){
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="bg-indigo-600 text-white hover:bg-indigo-600"
+        class="flex items-center rounded-lg px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+      >
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        routerLink="/staffs/list"
+        routerLinkActive="bg-indigo-600 text-white hover:bg-indigo-600"
+        class="flex items-center rounded-lg px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
+      >
+        <span>Staff</span>
+      </a>
+    }
 
     <a
       routerLink="/products/list"
@@ -28,14 +38,6 @@
       class="flex items-center rounded-lg px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
     >
       <span>Category</span>
-    </a>
-
-    <a
-      routerLink="/staffs/list"
-      routerLinkActive="bg-indigo-600 text-white hover:bg-indigo-600"
-      class="flex items-center rounded-lg px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white"
-    >
-      <span>Staff</span>
     </a>
   </nav>
 </aside>
